@@ -45,7 +45,7 @@ class Player(pygame.sprite.Sprite):
             for i in range(3):
                 inp.append(player_x)
                 inp.append(player_y)
-        if len(obstacles) == 1:
+        elif len(obstacles) == 1:
             inp.append(obstacles[0]['x'])
             inp.append(obstacles[0]['y'])
             for i in range(2):
