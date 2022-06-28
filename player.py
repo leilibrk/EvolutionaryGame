@@ -38,6 +38,10 @@ class Player(pygame.sprite.Sprite):
             layer_sizes = [3, 10, 2]  # TODO (Design your architecture here by changing the values)
             self.nn = NeuralNetwork(layer_sizes)
 
+    def input_vector_creator(self, screen_width, screen_height, obstacles, player_x, player_y):
+
+        return [obstacles, player_x, player_y]
+
     def think(self, screen_width, screen_height, obstacles, player_x, player_y):
         """
         Creates input vector of the neural network and determines the gravity according to neural network's output.
@@ -52,12 +56,6 @@ class Player(pygame.sprite.Sprite):
         :param player_y: 'y' position of the player
         """
         # TODO (change player's gravity here by calling self.change_gravity)
-
-        # This is a test code that changes the gravity based on a random number. Remove it before your implementation.
-        if random.randint(0, 2):
-            self.change_gravity('left')
-        else:
-            self.change_gravity('right')
 
     def change_gravity(self, new_gravity):
         """
