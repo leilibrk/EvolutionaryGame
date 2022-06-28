@@ -11,7 +11,7 @@ class NeuralNetwork:
         3 neurons in the input layer, 10 neurons in the hidden layer, and 2 neurons in the output layer.
         """
         # TODO (Implement FCNNs architecture here)
-        pass
+
 
     def activation(self, x):
         """
@@ -20,7 +20,7 @@ class NeuralNetwork:
         :return: Vector after applying activation function.
         """
         # TODO (Implement activation function here)
-        pass
+
 
     def forward(self, x):
         """
@@ -29,4 +29,5 @@ class NeuralNetwork:
         :return: Output vector
         """
         # TODO (Implement forward function here)
-        pass
+
+
