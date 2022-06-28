@@ -1,5 +1,6 @@
 import random
 
+import numpy as np
 import pygame
 from variables import global_variables
 from nn import NeuralNetwork
@@ -35,12 +36,31 @@ class Player(pygame.sprite.Sprite):
         if self.game_mode == "Neuroevolution":
             self.fitness = 0  # Initial fitness
 
-            layer_sizes = [3, 10, 2]  # TODO (Design your architecture here by changing the values)
+            layer_sizes = [6, 10, 1]  # TODO (Design your architecture here by changing the values)
             self.nn = NeuralNetwork(layer_sizes)
 
     def input_vector_creator(self, screen_width, screen_height, obstacles, player_x, player_y):
-
-        return [obstacles, player_x, player_y]
+        inp = []
+        if len(obstacles) == 0:
+            for i in range(3):
+                inp.append(player_x)
+                inp.append(player_y)
+        if len(obstacles) == 1:
+            inp.append(obstacles[0]['x'])
+            inp.append(obstacles[0]['y'])
+            for i in range(2):
+                inp.append(player_x)
+                inp.append(player_y)
+        else:
+            inp.append(obstacles[0]['x'])
+            inp.append(obstacles[0]['y'])
+            inp.append(obstacles[1]['x'])
+            inp.append(obstacles[1]['y'])
+            inp.append(player_x)
+            inp.append(player_y)
+        input_arr = np.array(inp)
+        input_norm = np.linalg.norm(input_arr)
+        return input_arr/input_norm
 
     def think(self, screen_width, screen_height, obstacles, player_x, player_y):
         """
@@ -56,6 +76,12 @@ class Player(pygame.sprite.Sprite):
         :param player_y: 'y' position of the player
         """
         # TODO (change player's gravity here by calling self.change_gravity)
+        input_vector = self.input_vector_creator(screen_width, screen_height, obstacles, player_x, player_y)
+        output = self.nn.forward(input_vector)
+        if output > 0.5:
+            self.change_gravity('right')
+        else:
+            self.change_gravity('left')
 
     def change_gravity(self, new_gravity):
         """
