@@ -26,6 +26,7 @@ class NeuralNetwork:
         # TODO (Implement activation function here)
         # sigmoid
         s = 1 / (1 + np.exp(-x))
+        # r = np.maximum(x, 0)
         return s
 
     def forward(self, x):
