@@ -36,9 +36,9 @@ class NeuralNetwork:
         """
         # TODO (Implement forward function here)
         x = x.reshape((self.in_size, 1))
-        z1 = np.dot(self.w1, x) + self.b1
+        z1 = self.w1 @ x + self.b1
         a1 = self.activation(z1)
-        z2 = np.dot(self.w2, a1) + self.b2
+        z2 = self.w2 @ a1 + self.b2
         a2 = self.activation(z2)
         return a2
 

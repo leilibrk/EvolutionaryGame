@@ -36,18 +36,28 @@ class Player(pygame.sprite.Sprite):
         if self.game_mode == "Neuroevolution":
             self.fitness = 0  # Initial fitness
 
-            layer_sizes = [6, 10, 1]  # TODO (Design your architecture here by changing the values)
+            layer_sizes = [10, 17, 2]  # TODO (Design your architecture here by changing the values)
             self.nn = NeuralNetwork(layer_sizes)
 
-    def input_vector_creator(self, screen_width, screen_height, obstacles, player_x, player_y):
+    def input_vector_creator(self, obstacles, player_x, player_y, screen_width, screen_height):
         inp = []
+        inp.append(screen_width)
+        inp.append(screen_height)
         if len(obstacles) == 0:
-            for i in range(3):
+            for i in range(4):
                 inp.append(player_x)
                 inp.append(player_y)
         elif len(obstacles) == 1:
             inp.append(obstacles[0]['x'])
             inp.append(obstacles[0]['y'])
+            for i in range(3):
+                inp.append(player_x)
+                inp.append(player_y)
+        elif len(obstacles) == 2:
+            inp.append(obstacles[0]['x'])
+            inp.append(obstacles[0]['y'])
+            inp.append(obstacles[1]['x'])
+            inp.append(obstacles[1]['y'])
             for i in range(2):
                 inp.append(player_x)
                 inp.append(player_y)
@@ -56,6 +66,8 @@ class Player(pygame.sprite.Sprite):
             inp.append(obstacles[0]['y'])
             inp.append(obstacles[1]['x'])
             inp.append(obstacles[1]['y'])
+            inp.append(obstacles[2]['x'])
+            inp.append(obstacles[2]['y'])
             inp.append(player_x)
             inp.append(player_y)
         input_arr = np.array(inp)
@@ -76,9 +88,10 @@ class Player(pygame.sprite.Sprite):
         :param player_y: 'y' position of the player
         """
         # TODO (change player's gravity here by calling self.change_gravity)
-        input_vector = self.input_vector_creator(screen_width, screen_height, obstacles, player_x, player_y)
+        input_vector = self.input_vector_creator(obstacles, player_x, player_y, screen_width, screen_height)
         output = self.nn.forward(input_vector)
-        if output > 0.5:
+
+        if output[1][0] > output[0][0]:
             self.change_gravity('right')
         else:
             self.change_gravity('left')

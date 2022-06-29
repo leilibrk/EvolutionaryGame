@@ -18,13 +18,13 @@ class Evolution:
         """
         # TODO (Implement top-k algorithm here)
         players.sort(key=lambda x: x.fitness, reverse=True)
-        # TODO (Additional: Implement roulette wheel here)
-        players = self.roulette_wheel(players, num_players)
-        # TODO (Additional: Implement SUS here)
-        players = self.SUS(players, num_players)
-        # Q-tournament
-        players = self.Q_tournament(players, num_players)
-        # TODO (Additional: Learning curve)
+        # # TODO (Additional: Implement roulette wheel here)
+        # players = self.roulette_wheel(players, num_players)
+        # # TODO (Additional: Implement SUS here)
+        # players = self.SUS(players, num_players)
+        # # Q-tournament
+        # players = self.Q_tournament(players, num_players)
+        # # TODO (Additional: Learning curve)
 
         return players[: num_players]
 
@@ -41,17 +41,16 @@ class Evolution:
             return [Player(self.game_mode) for _ in range(num_players)]
         else:
             # TODO ( Parent selection and child generation )
-            parents = self.roulette_wheel(prev_players, num_players)
+            parents = self.Q_tournament(prev_players, num_players)
             children = []
-            for p in parents:
-                for q in parents:
-                    if p == q:
-                        continue
-                    child1, child2 = self.crossover(p, q)
-                    child1_mut = self.mutate(child1, 0.5)
-                    child2_mut = self.mutate(child2, 0.5)
-                    children.append(child1_mut)
-                    children.append(child2_mut)
+            for i in range(0, len(parents), 2):
+                p = parents[i]
+                q = parents[i + 1]
+                child1, child2 = self.crossover(p, q)
+                child1_mut = self.mutate(child1, 0.5)
+                child2_mut = self.mutate(child2, 0.5)
+                children.append(child1_mut)
+                children.append(child2_mut)
             return children
 
     def clone_player(self, player):
