@@ -42,6 +42,8 @@ class Evolution:
         else:
             # TODO ( Parent selection and child generation )
             parents = self.Q_tournament(prev_players, num_players)
+            # parents = prev_players
+            # parents = self.roulette_wheel(prev_players, num_players)
             children = []
             for i in range(0, len(parents), 2):
                 p = parents[i]
