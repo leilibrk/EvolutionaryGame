@@ -16,8 +16,8 @@ axs[0].set(title='Best fitnesses')
 axs[1].plot(x,generation_results['worst_fitnesses'])
 axs[1].set(title='worst_fitnesses')
 
-axs[2].plot(x,generation_results['worst_fitnesses'])
-axs[2].set(title='worst_fitnesses')
+axs[2].plot(x,generation_results['average_fitnesses'])
+axs[2].set(title='average_fitnesses')
 
 fig.tight_layout(pad=3)
 
