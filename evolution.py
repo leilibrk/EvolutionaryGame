@@ -2,10 +2,12 @@ import copy
 
 from player import Player
 import numpy as np
+import json
 
 
 class Evolution:
     def __init__(self):
+        self.generation_number = 0
         self.game_mode = "Neuroevolution"
 
     def next_population_selection(self, players, num_players):
@@ -25,6 +27,11 @@ class Evolution:
         # # Q-tournament
         # players = self.Q_tournament(players, num_players)
         # # TODO (Additional: Learning curve)
+        fitness_list = [player.fitness for player in players]
+        best_fitness = float(np.max(fitness_list))
+        average_fitness = float(np.mean(fitness_list))
+        worst_fitness = float(np.min(fitness_list))
+        self.save_fitness_results(best_fitness, worst_fitness, average_fitness)
 
         return players[: num_players]
 
@@ -131,3 +138,26 @@ class Evolution:
         ch1 = np.concatenate((a[:mid], b[mid:]), axis=0)
         ch2 = np.concatenate((b[:mid], a[mid:]), axis=0)
         return ch1, ch2
+
+    def save_fitness_results(self, max_fitness, min_fitness, average_fitness):
+        if (self.generation_number == 0):
+            generation_results = {
+                'best_fitnesses': [max_fitness],
+                'worst_fitnesses': [min_fitness],
+                'average_fitnesses': [average_fitness]
+            }
+            with open('generation_results.json', 'w') as file:
+                json.dump(generation_results, file)
+            file.close()
+        else:
+            with open('generation_results.json', 'r') as file:
+                generation_results = json.load(file)
+            file.close()
+            generation_results['best_fitnesses'].append(max_fitness)
+            generation_results['worst_fitnesses'].append(min_fitness)
+            generation_results['average_fitnesses'].append(average_fitness)
+
+            with open('generation_results.json', 'w') as file:
+                json.dump(generation_results, file)
+            file.close()
+        self.generation_number += 1
