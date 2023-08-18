@@ -35,17 +35,10 @@ After several generations of evolution using the described algorithm, the player
 ### Evolution Progress
 
 **Generation: 2**
-![](https://github.com/leilibrk/EvolutionaryGame/blob/master/generation_2.png)
-*Generation: 2
-BScore: 64
-*
-![](https://github.com/leilibrk/EvolutionaryGame/blob/master/generation_5.png)
-*Generation: 5
-BScore: 113
-*
-![](https://github.com/leilibrk/EvolutionaryGame/blob/master/generation_17.png)
-*Generation: 17
-BScore: 304
+| Generation: 2 | Generation: 5 | Generation: 17 |
+|---------------|---------------|----------------|
+| ![Generation 2](https://github.com/leilibrk/EvolutionaryGame/blob/master/generation_2.png) <br> *BScore: 64* | ![Generation 5](https://github.com/leilibrk/EvolutionaryGame/blob/master/generation_5.png) <br> *BScore: 113* | ![Generation 17](https://github.com/leilibrk/EvolutionaryGame/blob/master/generation_17.png) <br> *BScore: 304* |
+
 *
 ## Acknowledgments
 
