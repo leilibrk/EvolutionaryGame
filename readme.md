@@ -35,15 +35,15 @@ After several generations of evolution using the described algorithm, the player
 ### Evolution Progress
 
 **Generation: 2**
-![generation 2](generation_2_image_url.jpg)
+![generation 2](generation_2.jpg)
 *Generation: 2
 BScore: 64
 *
-![generation 5](generation_5_image_url.jpg)
+![generation 5](generation_5.jpg)
 *Generation: 5
 BScore: 113
 *
-![generation 17](generation_17_image_url.jpg)
+![generation 17](generation_17.jpg)
 *Generation: 17
 BScore: 304
 *
