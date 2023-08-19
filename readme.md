@@ -2,10 +2,6 @@
 **Neuroevolution game assignment.**  
 **Fall 2022 - Computer Intelligence.**  
 
-# Snail jumper
-**Neuroevolution game assignment.**  
-**Fall 2022 - Computer Intelligence.**  
-
 # Evolutionary Algorithm for Training Neural Network in Snail Jumper Game
 
 This repository showcases the development of an evolutionary algorithm designed to train a neural network in the Snail Jumper game environment. The challenge here is to achieve effective performance in situations where there isn't sufficient data for traditional learning approaches.
